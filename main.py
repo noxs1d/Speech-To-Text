@@ -1,3 +1,5 @@
+from starlette.responses import HTMLResponse
+
 from data_preparator.data_preparator import DataPreparator
 from enum import Enum
 #from typing import Annotated
@@ -60,12 +62,11 @@ async def upload_file(file: UploadFile = File(...)):
     audio_recorded=file.filename
     return {"filename": file.filename}
 
-@app.post("/listen")
+@app.get("/listen")
 async def liste_audio():
     global audio_recorded
-    data_preparator = DataPreparator()
-    data_preparator.listen_audio(audio_recorded)
-
+    data=f'<audio controls><source src="{audio_recorded}" type="audio/wav">Your browser does not support the audio element.</audio>'
+    return HTMLResponse(data)
 
 @app.post("/predict/{model_name}/{task}")
 def predict(model_name:ModelsName, task:TaskName):
