@@ -30,4 +30,4 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 # Запуск приложения (измените в зависимости от используемой библиотеки/фреймворка)
 # Например, для FastAPI
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
